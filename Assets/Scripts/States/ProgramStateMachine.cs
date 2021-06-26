@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Canvas;
 using Chemicals;
+using Play;
 using UI;
 using UnityEngine;
 
@@ -56,6 +58,8 @@ namespace States
     }
     
     public class ProgramDrawState: ProgramState {
+        
+        
         public override void Update()
         {
             if (Input.GetButton("Cancel"))
@@ -67,9 +71,7 @@ namespace States
             {
                 if (TilemapManager.GetMouseTilePosition(out Vector2Int position))
                 {
-                    Chemical selectedChemical = DrawOnCanvasUI.selectedChemical;
-                    float selectedValue = DrawOnCanvasUI.selectedValue;
-                    CanvasManager.OverwriteCell(position, selectedChemical, selectedValue);
+                    CanvasManager.OverwriteCell(position, ChemicalManager.selectedChemical, ChemicalManager.selectedValue);
                 }
             }
         }
@@ -77,20 +79,19 @@ namespace States
     
     public class ProgramPlayingState: ProgramState
     {
-        private float timer;
-        private float delay = 0.01f;
+        private float m_Timer;
         public override void Start()
         {
-            timer = 0;
+            m_Timer = 0;
         }
 
         public override void Update()
         {
-            timer += Time.deltaTime;
+            m_Timer += Time.deltaTime;
 
-            if (timer > delay)
+            if (m_Timer > PlayManager.speed)
             {
-                timer = 0;
+                m_Timer = 0;
                 CanvasManager.NextGenerationCells();
             }
         }

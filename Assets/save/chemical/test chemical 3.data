@@ -1,0 +1,30 @@
+{
+  "rule": {
+    "m_AlivePercentages": [
+      {
+        "start": 0.2,
+        "end": 0.3
+      },
+      {
+        "start": 0.5,
+        "end": 0.6
+      }
+    ]
+  },
+  "chemicalName": "test chemical 3",
+  "guid": "5530c984-5fd2-483e-82ab-b972dbf1f09b",
+  "chemicalColors": [
+    {
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    {
+      "r": 0,
+      "g": 255,
+      "b": 0,
+      "a": 255
+    }
+  ]
+}

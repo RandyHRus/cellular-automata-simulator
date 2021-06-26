@@ -9,14 +9,15 @@ namespace UI
     public class CanvasCreatorUI : MonoBehaviour
     {
         public static readonly int minPaletteSize = 10;
-        public static readonly int maxPaletteSize = 200;
+        private static readonly int maxPaletteSize = 200;
         
-        [SerializeField] private InputField inputField;
+        [SerializeField] private InputField sizeInputField = null;
+        [SerializeField] private InputField nameInputField = null;
         [SerializeField] private TilemapManager tilemapManager;
 
         public void OnCreateButtonPressed()
         {
-            var size = (int.TryParse(inputField.text, out var result)) ? result : 10;
+            var size = (int.TryParse(sizeInputField.text, out var result)) ? result : 10;
             if (size < minPaletteSize) size = minPaletteSize;
             else if (size > maxPaletteSize) size = maxPaletteSize;
 
@@ -32,7 +33,7 @@ namespace UI
                 new Vector2Int(-1,-1),
                 new Vector2Int(0,0),
             };
-            var newCanvas = new CellsCanvas(size, neighbours);
+            var newCanvas = new CellsCanvas(size, neighbours, nameInputField.text);
             CanvasManager.LoadCanvas(newCanvas);
         }
     }

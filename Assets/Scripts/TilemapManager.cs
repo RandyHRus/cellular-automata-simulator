@@ -29,6 +29,7 @@ public class TilemapManager : MonoBehaviour
             {
                 Vector3Int vec3Coodinate = new Vector3Int(i, j, 0);
                 _tilemap.SetTile(vec3Coodinate, tileBase);
+                UpdateTile((Vector2Int)vec3Coodinate);
             }
         }
     }

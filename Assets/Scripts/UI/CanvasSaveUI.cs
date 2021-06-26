@@ -1,5 +1,6 @@
 using System.IO;
 using Canvas;
+using Saving;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,13 +8,9 @@ namespace UI
 {
     public class CanvasSaveUI: MonoBehaviour
     {
-        [SerializeField] private InputField nameInput = null;
-        
         public void OnSaveSubmitButtonPressed()
         {
-            string canvasName = nameInput.text;
-            
-            CanvasSaveManager.SaveCanvas(CanvasManager.currentCanvas, canvasName);
+            SaveManager.Save(CanvasManager.currentCanvas, SaveManager.canvasSubDir, CanvasManager.currentCanvas.m_CanvasName);
         }
     }
 }

@@ -1,39 +1,55 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 
-public class Rule
+namespace Rules
 {
-    private List<NumberPair> alivePercentages;
-    
-    public Rule(List<NumberPair> alivePercentages)
+    public class Rule
     {
-        this.alivePercentages = alivePercentages;
-    }
+        [JsonProperty] private List<NumberPair> m_AlivePercentages;
 
-    public float GetNextGenerationValue(float neighboursFraction)
-    {
-        foreach (var pair in alivePercentages)
+        [JsonConstructor]
+        public Rule()
         {
-            if (neighboursFraction >= pair.start && neighboursFraction <= pair.end)
-            {
-                //TODO: change
-                return 1f;
-            }
+            
+        }
+    
+        public Rule(List<NumberPair> alivePercentages)
+        {
+            this.m_AlivePercentages = alivePercentages;
         }
 
-        return -1f;
-    }
-}
+        public float GetNextGenerationValue(float neighboursFraction)
+        {
+            foreach (var pair in m_AlivePercentages)
+            {
+                if (neighboursFraction >= pair.start && neighboursFraction <= pair.end)
+                {
+                    //TODO: change
+                    return 1f;
+                }
+            }
 
-public class NumberPair
-{
-    public readonly float start, end;
-    
-    public NumberPair(float start, float end)
+            return -1f;
+        }
+    }
+
+    public class NumberPair
     {
-        this.start = start;
-        this.end = end;
+        [JsonProperty] public readonly float start, end;
+
+        [JsonConstructor]
+        public NumberPair()
+        {
+            
+        }
+    
+        public NumberPair(float start, float end)
+        {
+            this.start = start;
+            this.end = end;
+        }
     }
 }
